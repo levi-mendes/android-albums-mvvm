@@ -1,10 +1,10 @@
 package com.example.albumsmvvm.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,14 +12,8 @@ import com.example.albumsmvvm.R
 import com.example.albumsmvvm.adapter.ListAlbumAdapter
 import com.example.albumsmvvm.model.AlbumEntity
 import com.example.albumsmvvm.model.RequestState
-import com.example.albumsmvvm.viewmodel.AlbumViewModel
-import com.example.albumsmvvm.viewmodel.ViewModelFactory
 
 class MainActivity : BaseActivity(), OnSelectListener {
-
-    private val viewModel: AlbumViewModel by lazy {
-        ViewModelProviders.of(this, ViewModelFactory).get(AlbumViewModel::class.java)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +31,8 @@ class MainActivity : BaseActivity(), OnSelectListener {
                 is RequestState.Error   -> showError()
             }
         })
+
+        viewModel.getList()
     }
 
     private fun configList() {
@@ -66,5 +62,6 @@ class MainActivity : BaseActivity(), OnSelectListener {
 
     override fun onItemClick(item: AlbumEntity) {
 
+        startActivity(Intent(this, ListPhotosAlbumActivity::class.java))
     }
 }
