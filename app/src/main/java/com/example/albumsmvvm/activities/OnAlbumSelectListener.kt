@@ -2,7 +2,7 @@ package com.example.albumsmvvm.activities
 
 import com.example.albumsmvvm.model.AlbumEntity
 
-interface OnSelectListener {
+interface OnAlbumSelectListener {
 
     fun onItemClick(item: AlbumEntity)
 }

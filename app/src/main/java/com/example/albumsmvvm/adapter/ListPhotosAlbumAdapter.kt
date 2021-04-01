@@ -6,21 +6,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.albumsmvvm.R
-import com.example.albumsmvvm.activities.OnAlbumSelectListener
-import com.example.albumsmvvm.model.AlbumEntity
+import com.example.albumsmvvm.activities.OnPhotoSelectListener
+import com.example.albumsmvvm.model.AlbumDetailsEntity
 
-class ListAlbumAdapter(
-    private val items: List<AlbumEntity>,
-    private val listener: OnAlbumSelectListener
+class ListPhotosAlbumAdapter(
+    private val items: List<AlbumDetailsEntity>,
+    private val listener: OnPhotoSelectListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class OriginalViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var name: TextView = v.findViewById<View>(R.id.tv_title) as TextView
+        var tvId: TextView = v.findViewById<View>(R.id.tv_id) as TextView
+        var tvTitle: TextView = v.findViewById<View>(R.id.tv_title) as TextView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.item_album_list, parent, false)
+        val v = inflater.inflate(R.layout.item_photo_list, parent, false)
 
         return OriginalViewHolder(v)
     }
@@ -28,9 +29,11 @@ class ListAlbumAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is OriginalViewHolder) {
             val view = holder
-            val album = items[position]
-            view.name.text = album.title
-            holder.itemView.setOnClickListener { listener.onItemClick(album) }
+            val photo = items[position]
+            view.tvId.text = photo.id.toString()
+            view.tvTitle.text = photo.title
+
+            //holder.itemView.setOnClickListener { listener.onItemClick(photo) }
         }
     }
 

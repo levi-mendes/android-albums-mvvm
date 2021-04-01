@@ -13,12 +13,13 @@ import com.example.albumsmvvm.adapter.ListAlbumAdapter
 import com.example.albumsmvvm.model.AlbumEntity
 import com.example.albumsmvvm.model.RequestState
 
-class MainActivity : BaseActivity(), OnSelectListener {
+class MainActivity : BaseActivity(), OnAlbumSelectListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //TODO Titulo "Albums"
         configList()
 
         viewModel.albumList.observe(this, Observer {

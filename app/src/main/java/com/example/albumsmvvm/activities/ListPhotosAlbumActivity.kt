@@ -10,6 +10,8 @@ class ListPhotosAlbumActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_photos_album)
 
+        //TODO titulo "Fotos"
+
         viewModel.albumDetails.observe(this, Observer {
             
         })
