@@ -1,8 +1,8 @@
 package com.example.albumsmvvm.activities
 
-import com.example.albumsmvvm.model.AlbumDetailsEntity
+import com.example.albumsmvvm.model.PhotoAlbumEntity
 
 interface OnPhotoSelectListener {
 
-    fun onItemClick(item: AlbumDetailsEntity)
+    fun onItemClick(item: PhotoAlbumEntity)
 }

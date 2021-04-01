@@ -62,7 +62,10 @@ class MainActivity : BaseActivity(), OnAlbumSelectListener {
     }
 
     override fun onItemClick(item: AlbumEntity) {
-
-        startActivity(Intent(this, ListPhotosAlbumActivity::class.java))
+        val bundle = Bundle()
+        bundle.putInt("id_album", item.id)
+        val intent = Intent(Intent(this, ListPhotosAlbumActivity::class.java))
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }

@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.albumsmvvm.R
 import com.example.albumsmvvm.activities.OnPhotoSelectListener
-import com.example.albumsmvvm.model.AlbumDetailsEntity
+import com.example.albumsmvvm.model.PhotoAlbumEntity
 
 class ListPhotosAlbumAdapter(
-    private val items: List<AlbumDetailsEntity>,
-    private val listener: OnPhotoSelectListener
+        private val items: List<PhotoAlbumEntity>,
+        private val listener: OnPhotoSelectListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class OriginalViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -28,12 +28,11 @@ class ListPhotosAlbumAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is OriginalViewHolder) {
-            val view = holder
             val photo = items[position]
-            view.tvId.text = photo.id.toString()
-            view.tvTitle.text = photo.title
+            holder.tvId.text = photo.id.toString()
+            holder.tvTitle.text = photo.title
 
-            //holder.itemView.setOnClickListener { listener.onItemClick(photo) }
+            holder.itemView.setOnClickListener { listener.onItemClick(photo) }
         }
     }
 

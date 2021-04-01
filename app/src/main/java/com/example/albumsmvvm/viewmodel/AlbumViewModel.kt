@@ -3,7 +3,7 @@ package com.example.albumsmvvm.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.albumsmvvm.model.AlbumDetailsEntity
+import com.example.albumsmvvm.model.PhotoAlbumEntity
 import com.example.albumsmvvm.model.AlbumEntity
 import com.example.albumsmvvm.model.RequestState
 import com.example.albumsmvvm.repository.AlbumRepository
@@ -13,7 +13,7 @@ class AlbumViewModel(private val repository: AlbumRepository): ViewModel() {
 
     //TODO retornar como LiveData ao inves de MutableLiveData
     val albumList = MutableLiveData<RequestState<List<AlbumEntity>>>()
-    val albumDetails = MutableLiveData<RequestState<AlbumDetailsEntity>>()
+    val photosAlbum = MutableLiveData<RequestState<List<PhotoAlbumEntity>>>()
 
     fun getList() {
         viewModelScope.launch {
@@ -21,9 +21,9 @@ class AlbumViewModel(private val repository: AlbumRepository): ViewModel() {
         }
     }
 
-    fun getDetails(id: Int) {
+    fun getPhotos(idAlbum: Int) {
         viewModelScope.launch {
-            albumDetails.value = RequestState.Success(repository.getDetails(id))
+            photosAlbum.value = RequestState.Success(repository.getPhotos(idAlbum))
         }
     }
 }

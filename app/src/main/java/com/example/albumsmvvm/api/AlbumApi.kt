@@ -1,7 +1,7 @@
 package com.example.albumsmvvm.api
 
 import com.example.albumsmvvm.api.dto.AlbumDTO
-import com.example.albumsmvvm.api.dto.AlbumDetailsDTO
+import com.example.albumsmvvm.api.dto.PhotoAlbumDTO
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,7 +14,7 @@ class AlbumApi(retrofit: Retrofit) {
 
     suspend fun list() = service.list()
 
-    suspend fun details(id: Int) = service.details(id = id)
+    suspend fun photos(id: Int) = service.photos(id = id)
 
     interface ChalangeService {
 
@@ -22,6 +22,6 @@ class AlbumApi(retrofit: Retrofit) {
         suspend fun list(): MutableList<AlbumDTO>
 
         @GET("photos")
-        suspend fun details(@Query("albumId") id: Int): AlbumDetailsDTO
+        suspend fun photos(@Query("albumId") id: Int): List<PhotoAlbumDTO>
     }
 }

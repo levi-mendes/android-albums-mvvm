@@ -27,9 +27,8 @@ class ListAlbumAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is OriginalViewHolder) {
-            val view = holder
             val album = items[position]
-            view.name.text = album.title
+            holder.name.text = album.title
             holder.itemView.setOnClickListener { listener.onItemClick(album) }
         }
     }
