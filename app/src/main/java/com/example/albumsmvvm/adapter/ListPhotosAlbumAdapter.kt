@@ -1,16 +1,19 @@
 package com.example.albumsmvvm.adapter
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.albumsmvvm.R
-import com.example.albumsmvvm.activities.OnPhotoSelectListener
+import com.example.albumsmvvm.util.OnPhotoSelectListener
 import com.example.albumsmvvm.activities.PhotoFullScreenActivity
 import com.example.albumsmvvm.model.PhotoAlbumEntity
 
@@ -37,11 +40,17 @@ class ListPhotosAlbumAdapter(
             val context = holder.itemView.context
             val photo = items[position]
 
-            val url = photo.thumbnailUrl
+            val url = photo.thumbnailUrl + ".PNG"
+            Log.e("url", url)
+
+            val placeholder = BitmapFactory.decodeResource(context.resources, R.drawable.icon_loading)
+            val circularBitmapDrawable = RoundedBitmapDrawableFactory.create(context.resources, placeholder)
+            circularBitmapDrawable.isCircular = true
 
             Glide.with(holder.itemView.context)
+                    .applyDefaultRequestOptions(requestOptions())
                     .load(url)
-                    .circleCrop()
+                    .apply(RequestOptions.circleCropTransform())
                     .into(holder.ivThumbnail)
 
             holder.ivThumbnail.setOnClickListener {
@@ -53,6 +62,14 @@ class ListPhotosAlbumAdapter(
             holder.tvTitle.text = photo.title
             holder.itemView.setOnClickListener { listener.onItemClick(photo) }
         }
+    }
+
+    private fun requestOptions(): RequestOptions {
+        return RequestOptions()
+                .circleCrop()
+                .placeholder(R.drawable.icon_loading)
+                .error(R.drawable.icon_error_loading)
+                .circleCrop()
     }
 
     override fun getItemCount() = items.size

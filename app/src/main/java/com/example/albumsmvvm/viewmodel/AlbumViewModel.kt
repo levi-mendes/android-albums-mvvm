@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class AlbumViewModel(private val repository: AlbumRepository): ViewModel() {
 
-    //TODO retornar como LiveData ao inves de MutableLiveData
     val albumList = MutableLiveData<RequestState<List<AlbumEntity>>>()
     val photosAlbum = MutableLiveData<RequestState<List<PhotoAlbumEntity>>>()
 

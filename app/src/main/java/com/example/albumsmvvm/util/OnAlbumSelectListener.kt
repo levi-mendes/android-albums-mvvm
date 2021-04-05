@@ -1,4 +1,4 @@
-package com.example.albumsmvvm.activities
+package com.example.albumsmvvm.util
 
 import com.example.albumsmvvm.model.AlbumEntity
 

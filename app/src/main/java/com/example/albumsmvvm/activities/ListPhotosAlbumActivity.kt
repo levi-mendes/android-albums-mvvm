@@ -11,6 +11,7 @@ import com.example.albumsmvvm.R
 import com.example.albumsmvvm.adapter.ListPhotosAlbumAdapter
 import com.example.albumsmvvm.model.PhotoAlbumEntity
 import com.example.albumsmvvm.model.RequestState
+import com.example.albumsmvvm.util.OnPhotoSelectListener
 
 class ListPhotosAlbumActivity : BaseActivity(), OnPhotoSelectListener {
 

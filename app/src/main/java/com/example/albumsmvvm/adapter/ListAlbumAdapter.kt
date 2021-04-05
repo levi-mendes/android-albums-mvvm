@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.albumsmvvm.R
-import com.example.albumsmvvm.activities.OnAlbumSelectListener
+import com.example.albumsmvvm.util.OnAlbumSelectListener
 import com.example.albumsmvvm.model.AlbumEntity
 
 class ListAlbumAdapter(

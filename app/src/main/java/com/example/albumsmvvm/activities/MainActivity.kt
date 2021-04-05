@@ -12,6 +12,7 @@ import com.example.albumsmvvm.R
 import com.example.albumsmvvm.adapter.ListAlbumAdapter
 import com.example.albumsmvvm.model.AlbumEntity
 import com.example.albumsmvvm.model.RequestState
+import com.example.albumsmvvm.util.OnAlbumSelectListener
 
 class MainActivity : BaseActivity(), OnAlbumSelectListener {
 
