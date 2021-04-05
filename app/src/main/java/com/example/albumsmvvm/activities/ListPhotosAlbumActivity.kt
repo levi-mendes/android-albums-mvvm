@@ -11,16 +11,14 @@ import com.example.albumsmvvm.R
 import com.example.albumsmvvm.adapter.ListPhotosAlbumAdapter
 import com.example.albumsmvvm.model.PhotoAlbumEntity
 import com.example.albumsmvvm.model.RequestState
-import com.example.albumsmvvm.util.OnPhotoSelectListener
 
-class ListPhotosAlbumActivity : BaseActivity(), OnPhotoSelectListener {
+class ListPhotosAlbumActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_photos_album)
 
-        //TODO titulo "Fotos"
-
+        configActionBar()
         configList()
 
         viewModel.photosAlbum.observe(this, Observer {
@@ -30,12 +28,18 @@ class ListPhotosAlbumActivity : BaseActivity(), OnPhotoSelectListener {
                     loadList(it.data)
                 }
                 is RequestState.Loading -> showLoading()
-                is RequestState.Error   -> showError()
+                is RequestState.Error   -> showAlert(it.throwable.message)
             }
         })
 
         val idAlbum = intent.extras?.get("id_album") as Int
         viewModel.getPhotos(idAlbum)
+    }
+
+    private fun configActionBar() {
+        supportActionBar?.title = "Photos"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun configList() {
@@ -53,17 +57,9 @@ class ListPhotosAlbumActivity : BaseActivity(), OnPhotoSelectListener {
         findViewById<ProgressBar>(R.id.pb_loading).visibility = View.VISIBLE
     }
 
-    private fun showError() {
-
-    }
-
     private fun loadList(list: List<PhotoAlbumEntity>) {
         val rvAlbums = findViewById<RecyclerView>(R.id.rv_photos)
-        val adapter = ListPhotosAlbumAdapter(list, this)
+        val adapter = ListPhotosAlbumAdapter(list)
         rvAlbums.adapter = adapter
-    }
-
-    override fun onItemClick(item: PhotoAlbumEntity) {
-
     }
 }

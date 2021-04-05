@@ -8,6 +8,7 @@ import com.example.albumsmvvm.model.AlbumEntity
 import com.example.albumsmvvm.model.RequestState
 import com.example.albumsmvvm.repository.AlbumRepository
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class AlbumViewModel(private val repository: AlbumRepository): ViewModel() {
 
@@ -16,7 +17,12 @@ class AlbumViewModel(private val repository: AlbumRepository): ViewModel() {
 
     fun getList() {
         viewModelScope.launch {
-            albumList.value = RequestState.Success(repository.getList())
+            try {
+                albumList.value = RequestState.Success(repository.getList())
+
+            } catch (e: Exception) {
+                albumList.value = RequestState.Error(Throwable("Erro ao efetuar a busca dos albums"))
+            }
         }
     }
 

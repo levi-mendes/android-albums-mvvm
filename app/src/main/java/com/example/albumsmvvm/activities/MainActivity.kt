@@ -20,8 +20,9 @@ class MainActivity : BaseActivity(), OnAlbumSelectListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //TODO Titulo "Albums"
         configList()
+
+        supportActionBar?.title = "Album"
 
         viewModel.albumList.observe(this, Observer {
             when (it) {
@@ -30,7 +31,10 @@ class MainActivity : BaseActivity(), OnAlbumSelectListener {
                     loadList(it.data)
                 }
                 is RequestState.Loading -> showLoading()
-                is RequestState.Error   -> showError()
+                is RequestState.Error   -> {
+                    hideLoading()
+                    showAlert(it.throwable.message)
+                }
             }
         })
 
@@ -50,10 +54,6 @@ class MainActivity : BaseActivity(), OnAlbumSelectListener {
 
     private fun showLoading() {
         findViewById<ProgressBar>(R.id.pb_loading).visibility = View.VISIBLE
-    }
-
-    private fun showError() {
-
     }
 
     private fun loadList(list: List<AlbumEntity>) {

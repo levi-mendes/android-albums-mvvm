@@ -1,29 +1,25 @@
 package com.example.albumsmvvm.adapter
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.albumsmvvm.R
-import com.example.albumsmvvm.util.OnPhotoSelectListener
 import com.example.albumsmvvm.activities.PhotoFullScreenActivity
 import com.example.albumsmvvm.model.PhotoAlbumEntity
 
 class ListPhotosAlbumAdapter(
-        private val items: List<PhotoAlbumEntity>,
-        private val listener: OnPhotoSelectListener
+        private val items: List<PhotoAlbumEntity>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class OriginalViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        //var tvId: TextView = v.findViewById<View>(R.id.tv_id) as TextView
+        var tvId: TextView = v.findViewById<View>(R.id.tv_id) as TextView
         var tvTitle: TextView = v.findViewById<View>(R.id.tv_title) as TextView
         var ivThumbnail: ImageView = v.findViewById(R.id.iv_thumbnail) as ImageView
     }
@@ -43,11 +39,7 @@ class ListPhotosAlbumAdapter(
             val url = photo.thumbnailUrl + ".PNG"
             Log.e("url", url)
 
-            val placeholder = BitmapFactory.decodeResource(context.resources, R.drawable.icon_loading)
-            val circularBitmapDrawable = RoundedBitmapDrawableFactory.create(context.resources, placeholder)
-            circularBitmapDrawable.isCircular = true
-
-            Glide.with(holder.itemView.context)
+            Glide.with(context)
                     .applyDefaultRequestOptions(requestOptions())
                     .load(url)
                     .apply(RequestOptions.circleCropTransform())
@@ -59,8 +51,8 @@ class ListPhotosAlbumAdapter(
                 context.startActivity(intent)
             }
 
+            holder.tvId.text = photo.id.toString()
             holder.tvTitle.text = photo.title
-            holder.itemView.setOnClickListener { listener.onItemClick(photo) }
         }
     }
 
