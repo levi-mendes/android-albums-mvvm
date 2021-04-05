@@ -16,7 +16,6 @@ class ListAlbumAdapter(
 
     inner class OriginalViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var tvTitle: TextView = v.findViewById<View>(R.id.tv_title) as TextView
-        //var tvId: TextView = v.findViewById<View>(R.id.tv_id) as TextView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -30,7 +29,6 @@ class ListAlbumAdapter(
         if (holder is OriginalViewHolder) {
             val album = items[position]
             holder.tvTitle.text = album.title
-            //holder.tvId.text = album.id.toString()
             holder.itemView.setOnClickListener { listener.onItemClick(album) }
         }
     }
